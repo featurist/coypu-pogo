@@ -1,5 +1,3 @@
-http = require 'httpism'
-fs = require 'fs'
 scenario = require '../src/scenario'
 
 describe 'scenario'

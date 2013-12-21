@@ -20,7 +20,7 @@ describe 'chromedriver'
             log path := './chromedriver.log'
 
         after
-            proc.kill()
+            proc.stop!
             fs.unlink! (log path)
 
         it 'starts on port 9195'
@@ -36,7 +36,7 @@ describe 'chromedriver'
             log path := './chromedriver.log'
 
         after
-            proc.kill()
+            proc.stop!
             fs.unlink! (log path)
 
         it 'starts on port 9197'
@@ -52,7 +52,7 @@ describe 'chromedriver'
             proc := chromedriver.start! { port = 9198, log path = log path }
 
         after
-            proc.kill()
+            proc.stop!
             fs.unlink! (log path)
 
         it 'starts on port 9198'

@@ -14,6 +14,12 @@ start (options, started) =
 
     child.stdout.on 'data' @(data)
         if (data.to string().index of "Starting ChromeDriver" > -1)
+            child.stop (stopped) =
+                child.on 'close'
+                    stopped (null)
+
+                child.kill()
+
             started (null, child)
 
     child.on 'exit' @(status)
