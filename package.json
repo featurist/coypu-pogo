@@ -1,0 +1,21 @@
+{
+  "name": "coypu.js",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "should": "~2.1.1",
+    "mocha": "~1.16.1",
+    "pogo": "~0.6.4",
+    "httpism": "0.0.4",
+    "chromedriver": "~2.6.0"
+  }
+}
