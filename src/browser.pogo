@@ -1,40 +1,33 @@
 http = require 'httpism'
 
 Browser (port) =
-    this.port = port
-    this.selenium base url = "http://localhost:#(this.port)"
+    this.selenium resource = http.resource "http://localhost:#(port)"
     this
-
-Browser.prototype.selenium command url (command) =
-    "#(this.session url)/#(command)"
-
-Browser.prototype.selenium url (path) =
-    "#(this.selenium base url)/#(path)"
-
-Browser.prototype.selenium post! (command, body) =
-    http.post! (self.selenium command url (command)) { body = JSON.stringify(body) }
 
 Browser.prototype.open! =
     body = { desired capabilities = {} }
-    response = http.post! (self.selenium url "session") { body = JSON.stringify(body) }
+    response = self.selenium resource.post! 'session' { body = JSON.stringify(body) }
     self.session url = response.url
+    self.session resource = http.resource "#(response.url)/"
     self
 
+Browser.prototype.selenium post! (command, body) =
+    self.session resource.post! (command) { body = JSON.stringify(body) }
+
 Browser.prototype.close! =
-    result = http.delete! (this.session url)
+    self.session resource.delete! (self.session url)
     self
 
 Browser.prototype.visit! (url) =
-    this.selenium post! 'url' { url = url }
+    self.selenium post! 'url' { url = url }
     self
 
 Browser.prototype.execute script! (script, args) =
-    response = this.selenium post! 'execute' { script = script, args = args || [] }
-    value = JSON.parse(response.body).value
-    value
+    response = self.selenium post! 'execute' { script = script, args = args || [] }
+    JSON.parse(response.body).value
 
 Browser.prototype.get selenium json! (command) =
-    response = http.get! (self.selenium command url (command))
+    response = self.session resource.get! (command)
     JSON.parse(response.body).value
 
 Browser.prototype.current url! =
@@ -44,11 +37,11 @@ Browser.prototype.source! =
     self.get selenium json! 'source'
 
 Browser.prototype.status! =
-    response = http.get! (self.selenium url 'status')
+    response = self.selenium resource.get! 'status'
     JSON.parse(response.body).value
 
 Browser.prototype.title! =
-    response = http.get! (self.selenium command url 'title')
+    response = self.session resource.get! 'title'
     response.body
 
 exports.Browser = Browser
