@@ -1,6 +1,6 @@
 {
-  "name": "coypu.js",
-  "version": "0.0.0",
+  "name": "coypu.pogo",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "@joshski",
   "license": "BSD-2-Clause",
   "dependencies": {
     "should": "~2.1.1",
