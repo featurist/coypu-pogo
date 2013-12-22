@@ -15,7 +15,7 @@
     "should": "~2.1.1",
     "mocha": "~1.16.1",
     "pogo": "~0.6.4",
-    "httpism": "0.0.4",
+    "httpism": "git://github.com/featurist/httpism.git",
     "chromedriver": "~2.6.0"
   }
 }
