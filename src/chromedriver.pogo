@@ -2,7 +2,7 @@ chromedriver = require 'chromedriver'
 child process = require 'child_process'
 
 start (options, started) =
-    port = options.port || 9195
+    port = options.port || 9515
     log path = options.log path || './chromedriver.log'
 
     child = child process.spawn (chromedriver.path) [

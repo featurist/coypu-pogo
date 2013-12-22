@@ -46,6 +46,6 @@ Browser.prototype = {
 
 exports.Browser = Browser
 
-exports.open! (port: 9195) =
+exports.open! (port: 9515) =
     browser = @new Browser(port)
     browser.open!

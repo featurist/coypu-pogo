@@ -23,8 +23,8 @@ describe 'chromedriver'
             proc.stop!
             fs.unlink! (log path)
 
-        it 'starts on port 9195'
-            should be running on port! 9195
+        it 'starts on port 9515'
+            should be running on port! 9515
 
         it 'writes logs to ./chromedriver.log'
             should be logging to! './chromedriver.log'
