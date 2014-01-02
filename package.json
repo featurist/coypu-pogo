@@ -17,5 +17,8 @@
     "pogo": "~0.6.4",
     "httpism": "git://github.com/featurist/httpism.git",
     "chromedriver": "~2.6.0"
+  },
+  "devDependencies": {
+    "express": "~3.4.7"
   }
 }
