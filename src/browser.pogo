@@ -42,10 +42,28 @@ Browser.prototype = {
     title! =
         self.in session.get! 'title'.body.value
 
+    find css (selector) =
+        @new Element Scope (self, selector)
+
 }
+
+Element Scope (browser, selector) =
+    this.browser = browser
+    this.selector = selector
+    this
+
+Element Scope.prototype = {
+
+    click! =
+        options = { using = 'css selector', value = (self.selector) }
+        element = self.browser.in session.post! "element" { body = options }
+        self.browser.in session.post! "element/#(element.body.value.ELEMENT)/click"
+
+}
+
+wait (ms, ok) = set timeout (ok, ms)
+
 
 exports.Browser = Browser
 
-exports.open! (port: 9515) =
-    browser = @new Browser(port)
-    browser.open!
+exports.open! (port: 9515) = (@new Browser(port)).open!
