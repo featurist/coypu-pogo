@@ -12,16 +12,16 @@ describe 'browser'
         this.timeout 4000
         proc := chromedriver.start!
         brow := browser.open!
-        app.listen! 3003
+        app.listen! 3004
         brow.status!.build.version.should.exist
-        brow.visit! 'http://127.0.0.1:3003/'
+        brow.visit! 'http://127.0.0.1:3004/'
 
     after
         brow.close!
         proc.stop!
 
     it 'visits urls'
-        brow.current url!.should.equal 'http://127.0.0.1:3003/'
+        brow.current url!.should.equal 'http://127.0.0.1:3004/'
 
     it 'returns the source of the current page'
         brow.source!.should.contain 'Well, Hello'
@@ -30,4 +30,4 @@ describe 'browser'
         brow.title!.should.contain 'Home Page'
 
     it 'executes scripts'
-        brow.execute script!('return window.location.href').should.equal 'http://127.0.0.1:3003/'
+        brow.execute script!('return window.location.href').should.equal 'http://127.0.0.1:3004/'

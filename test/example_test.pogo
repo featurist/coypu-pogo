@@ -2,6 +2,27 @@ child process = require 'child_process'
 chromedriver = require '../src/chromedriver'
 path = require 'path'
 
+describe '/example.pogo'
+
+    chrome = nil
+    app server = nil
+
+    before
+        app server := run example app!
+        chrome := chromedriver.start!
+
+    after
+        chrome.stop!
+        app server.kill()
+
+    it 'executes'
+        this.timeout 5000
+        result = run example!
+        result.out.should.equal "Foo Page\n"
+        result.err.should.equal ''
+        result.status.should.equal 0
+
+
 run example (ran) =
     example = path.resolve (__dirname, "../example.pogo")
 
@@ -25,19 +46,24 @@ run example (ran) =
 
     true
 
-describe '/example.pogo'
+run example app (started) =
+    example = path.resolve (__dirname, "example_app/server.pogo")
 
-    proc = nil
+    child = child process.spawn ('pogo') [example]
 
-    before
-        proc := chromedriver.start!
+    out = ''
+    err = ''
 
-    after
-        proc.stop!
+    child.stdout.once 'data' @(data)
+        started (null, child)
 
-    it 'executes'
-        this.timeout 5000
-        result = run example!
-        result.out.should.equal ''
-        result.err.should.equal ''
-        result.status.should.equal 0
+    child.stdout.on 'data' @(data)
+        out := out + data.to string()
+
+    child.stderr.on 'data' @(data)
+        err := err + data.to string()
+
+    child.on 'exit' @(status)
+        console.log("APP SERVER EXITED WITH STATUS #(status)\nSTDOUT\n#(out)\nSTDERR\n#(err)")
+
+    true
