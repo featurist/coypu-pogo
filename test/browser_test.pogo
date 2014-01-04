@@ -31,3 +31,7 @@ describe 'browser'
 
     it 'executes scripts'
         brow.execute script!('return window.location.href').should.equal 'http://127.0.0.1:3004/'
+
+    it 'clicks elements'
+        brow.find css 'a'.click!
+        brow.current url!.should.equal 'http://127.0.0.1:3004/foo'
