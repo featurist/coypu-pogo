@@ -44,7 +44,10 @@ Driver.prototype = {
         self.in session.get! 'title'.body.value
 
     find css (selector) =
-        @new Node (self, selector)
+        @new Node (self, 'css selector', selector)
+
+    find xpath (selector) =
+        @new Node (self, 'xpath', selector)
 
 }
 
