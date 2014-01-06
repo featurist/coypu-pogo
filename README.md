@@ -2,10 +2,9 @@
 
 Intuitive, [robust](http://github.com/featurist/coypu) browser automation for [PogoScript](http://github.com/featurist/pogoscript)
 
-### Work in progress!
+### Work in progress
 
-Coypu-pogo is just getting started. There are a few [tests](./test) but that's about it. Get involved!
-
+Coypu-pogo is just getting started. Don't expect too much from it yet, but please feel free to join in!
 
 ### Example
 
@@ -18,3 +17,8 @@ Coypu-pogo is just getting started. There are a few [tests](./test) but that's a
     console.log(browser.title!)
 
     browser.close!
+
+
+### License
+
+BSD
